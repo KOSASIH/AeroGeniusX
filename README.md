@@ -4,6 +4,8 @@ Genius-level AI innovation in aerospace engineering and design.
 
 # Guide and Tutorials 
 
+## Calculate Aerodinamis Forces 
+
 ```python
 import math
 
@@ -62,6 +64,8 @@ The function uses the given inputs and predefined constants to perform the neces
 In the example usage, the function is called with sample values for airspeed, altitude, and aircraft configuration. The resulting aerodynamic analysis is printed to the console.
 
 To optimize the shape of an aircraft wing for maximum lift-to-drag ratio, we can use an optimization algorithm such as the genetic algorithm. Here's an example code that demonstrates the process:
+
+## Calculate Lift Drag 
 
 ```python
 import numpy as np
@@ -201,6 +205,8 @@ The function calculates the axial stress and bending stress in the fuselage base
 The function outputs the analysis results in a markdown format, including the fuselage geometry parameters, material properties, applied loads, axial stress, bending stress, maximum stress, safety factor, and deformation.
 
 An example usage is provided at the end of the code, demonstrating how to pass the input parameters to the `analyze_fuselage` function. Feel free to modify the input values to suit your specific analysis requirements.
+
+## Calculate Aerodinamis Forces 
 
 ```python
 import numpy as np
@@ -370,6 +376,8 @@ print(markdown_code)
 
 This code defines a function `calculate_weight` that takes inputs such as fuselage geometry, material properties, and safety factors, and returns markdown code presenting the optimized fuselage shape parameters and the corresponding weight. The optimization problem aims to minimize the weight of the fuselage while maintaining structural integrity. The code uses the `scipy.optimize.minimize` function to perform the optimization, with the objective function being the weight of the fuselage and the constraint function ensuring that the critical buckling load is greater than the maximum allowable load. The code also includes input parameters for the fuselage geometry, material properties, and safety factors, which can be adjusted according to specific requirements.
 
+## Analyze Aircraft Stabilitas 
+
 ```python
 import numpy as np
 
@@ -491,6 +499,7 @@ This code defines a function `analyze_aircraft_stability` that takes inputs rela
 
 To use this code, you can provide the necessary inputs (e.g., aircraft dynamics, control system parameters, and flight conditions) and call the `analyze_aircraft_stability` function. The resulting markdown output will be printed.
 
+## Simulate Propulsion System
 ```python
 import math
 
@@ -652,6 +661,8 @@ print(markdown_output)
 
 The above code defines a function `calculate_stability_and_maneuverability` that takes inputs such as `tail_geometry`, `aircraft_dynamics`, and `flight_conditions`. It uses the `scipy.optimize.minimize` function to optimize the tail shape parameters based on the provided objective function. The `update_tail_geometry` function updates the tail geometry with the optimized parameters. The `calculate_stability` and `calculate_maneuverability` functions calculate the stability and maneuverability characteristics based on the updated tail geometry, aircraft dynamics, and flight conditions. Finally, the code generates the markdown output with the optimized tail shape parameters, stability characteristics, and maneuverability characteristics.
 
+## Calculate Temperature Distribution 
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -749,6 +760,8 @@ plt.show()
 
 The code above calculates the temperature distribution in an aircraft's thermal protection system. It takes inputs such as thermal properties of the materials, heat transfer mechanisms, and external heat flux. The code uses a finite difference method to discretize the structure into divisions and iteratively calculates the temperature change in each division based on the heat transfer mechanisms. The resulting temperature distribution is then plotted using a 3D scatter plot.
 
+## Calculate Thrust 
+
 ```python
 import math
 
@@ -802,6 +815,8 @@ The above code defines several functions to calculate the thrust, fuel consumpti
 
 You can customize the `engine_power`, `engine_efficiency`, `airspeed`, and `altitude` variables to simulate different propulsion system scenarios. The markdown output will provide detailed analysis of the thrust, fuel consumption, and efficiency of the propulsion system under the given conditions.
 
+ ## Calculate Aerodynamic Forces 
+ 
 ```python
 import numpy as np
 from scipy.optimize import minimize
@@ -911,6 +926,8 @@ The code then defines an objective function and constraint function for the opti
 The initial guess for the tail geometry is set, and the optimization is performed using the `minimize` function. The optimized tail shape parameters are extracted from the optimization result, and the stability and maneuverability characteristics are calculated based on the optimized tail geometry.
 
 Finally, the optimized tail shape parameters and the corresponding stability and maneuverability characteristics are printed as the output.
+
+## Calculate Temperature Distribution 
 
 ```python
 import numpy as np

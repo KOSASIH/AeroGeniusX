@@ -1092,3 +1092,140 @@ def simulate_propulsion_system(engine_characteristics, airspeed, altitude):
 To use the `simulate_propulsion_system` function, you need to provide the engine characteristics, airspeed, and altitude as inputs. The function will then calculate the thrust, fuel consumption, and efficiency of the propulsion system. The results will be formatted as markdown code for easy presentation.
 
 Note: This code assumes a standard atmosphere model for altitude calculations. Adjustments may be required for specific cases.
+
+```python
+import numpy as np
+
+def calculate_temperature_distribution(material_properties, heat_transfer, external_heat_flux):
+    # Define the thermal properties of the materials
+    conductivity = material_properties['conductivity']  # W/mK
+    density = material_properties['density']  # kg/m^3
+    specific_heat = material_properties['specific_heat']  # J/kgK
+
+    # Define the heat transfer mechanisms
+    conduction = heat_transfer['conduction']
+    convection = heat_transfer['convection']
+    radiation = heat_transfer['radiation']
+
+    # Define the external heat flux
+    heat_flux = external_heat_flux  # W/m^2
+
+    # Perform thermal analysis
+    # ... code to calculate temperature distribution ...
+
+    # Return the results
+    return temperature_distribution
+
+def calculate_heat_flux(temperature_distribution):
+    # ... code to calculate heat flux ...
+
+    # Return the results
+    return heat_flux
+
+def calculate_thermal_protection_effectiveness(temperature_distribution, thermal_threshold):
+    # ... code to calculate thermal protection effectiveness ...
+
+    # Return the results
+    return thermal_protection_effectiveness
+
+# Define the inputs
+material_properties = {
+    'conductivity': 100,  # W/mK
+    'density': 2000,  # kg/m^3
+    'specific_heat': 1000  # J/kgK
+}
+
+heat_transfer = {
+    'conduction': True,
+    'convection': True,
+    'radiation': True
+}
+
+external_heat_flux = 5000  # W/m^2
+
+thermal_threshold = 1500  # °C
+
+# Perform thermal analysis
+temperature_distribution = calculate_temperature_distribution(material_properties, heat_transfer, external_heat_flux)
+
+# Calculate heat flux
+heat_flux = calculate_heat_flux(temperature_distribution)
+
+# Calculate thermal protection effectiveness
+thermal_protection_effectiveness = calculate_thermal_protection_effectiveness(temperature_distribution, thermal_threshold)
+
+# Output the results in markdown format
+print("## Thermal Performance Analysis")
+print("### Temperature Distribution")
+print(temperature_distribution)
+print("### Heat Flux")
+print(heat_flux)
+print("### Thermal Protection Effectiveness")
+print(thermal_protection_effectiveness)
+```
+
+This code provides a framework for analyzing the thermal performance of an aircraft's thermal protection system. It defines functions to calculate the temperature distribution, heat flux, and thermal protection effectiveness based on the inputs of material properties, heat transfer mechanisms, external heat flux, and thermal threshold. The results are then outputted in markdown format, providing a comprehensive analysis of the temperature distribution, heat flux, and thermal protection effectiveness in the aircraft's structure.
+
+```python
+import math
+
+def calculate_thrust(engine_characteristics, airspeed, altitude):
+    # Calculate thrust based on engine characteristics
+    thrust = engine_characteristics['thrust_constant'] * engine_characteristics['thrust_coefficient'] * airspeed ** 2
+    
+    # Adjust thrust for altitude
+    thrust *= (1 - (altitude * engine_characteristics['altitude_loss']))
+    
+    return thrust
+
+def calculate_fuel_consumption(engine_characteristics, thrust):
+    # Calculate fuel consumption based on thrust
+    fuel_consumption = thrust / engine_characteristics['specific_fuel_consumption']
+    
+    return fuel_consumption
+
+def calculate_efficiency(thrust, fuel_consumption):
+    # Calculate efficiency as thrust divided by fuel consumption
+    efficiency = thrust / fuel_consumption
+    
+    return efficiency
+
+# Example input values
+engine_characteristics = {
+    'thrust_constant': 0.5,
+    'thrust_coefficient': 0.8,
+    'altitude_loss': 0.001,
+    'specific_fuel_consumption': 0.02
+}
+airspeed = 100
+altitude = 5000
+
+# Calculate thrust, fuel consumption, and efficiency
+thrust = calculate_thrust(engine_characteristics, airspeed, altitude)
+fuel_consumption = calculate_fuel_consumption(engine_characteristics, thrust)
+efficiency = calculate_efficiency(thrust, fuel_consumption)
+
+# Output markdown code for analysis
+output = f"""
+## Propulsion System Analysis
+
+### Engine Characteristics
+- Thrust Constant: {engine_characteristics['thrust_constant']}
+- Thrust Coefficient: {engine_characteristics['thrust_coefficient']}
+- Altitude Loss: {engine_characteristics['altitude_loss']}
+- Specific Fuel Consumption: {engine_characteristics['specific_fuel_consumption']}
+
+### Input Values
+- Airspeed: {airspeed}
+- Altitude: {altitude}
+
+### Results
+- Thrust: {thrust}
+- Fuel Consumption: {fuel_consumption}
+- Efficiency: {efficiency}
+"""
+
+print(output)
+```
+
+The code above defines functions to calculate thrust, fuel consumption, and efficiency based on the given engine characteristics, airspeed, and altitude. It then uses example input values to calculate the results and generates markdown code for the analysis. The output includes the engine characteristics, input values, and the calculated thrust, fuel consumption, and efficiency.

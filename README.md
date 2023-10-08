@@ -489,3 +489,164 @@ print(output)
 This code defines a function `analyze_aircraft_stability` that takes inputs related to aircraft dynamics, control system parameters, and flight conditions. It then computes stability derivatives, control effectiveness, and handling qualities based on these inputs. The function returns a markdown-formatted output summarizing the analysis.
 
 To use this code, you can provide the necessary inputs (e.g., aircraft dynamics, control system parameters, and flight conditions) and call the `analyze_aircraft_stability` function. The resulting markdown output will be printed.
+
+```python
+import math
+
+def simulate_propulsion_system(engine_characteristics, airspeed, altitude):
+    # Extract engine characteristics
+    max_thrust = engine_characteristics['max_thrust']
+    specific_fuel_consumption = engine_characteristics['specific_fuel_consumption']
+    efficiency = engine_characteristics['efficiency']
+    
+    # Calculate thrust
+    thrust = calculate_thrust(max_thrust, airspeed, altitude)
+    
+    # Calculate fuel consumption
+    fuel_consumption = calculate_fuel_consumption(thrust, specific_fuel_consumption)
+    
+    # Calculate efficiency
+    propulsion_efficiency = calculate_efficiency(thrust, fuel_consumption)
+    
+    # Output markdown code
+    output = f"## Propulsion System Analysis\n\n"
+    output += f"**Thrust:** {thrust} N\n"
+    output += f"**Fuel Consumption:** {fuel_consumption} kg/s\n"
+    output += f"**Efficiency:** {propulsion_efficiency}\n"
+    
+    return output
+
+def calculate_thrust(max_thrust, airspeed, altitude):
+    # Calculate thrust using simplified model
+    rho = calculate_air_density(altitude)
+    thrust = max_thrust * (airspeed / 343) * math.sqrt(rho / 1.225)
+    return thrust
+
+def calculate_air_density(altitude):
+    # Calculate air density using simplified model
+    temperature = 288.15 - 0.0065 * altitude
+    pressure = 101325 * (temperature / 288.15) ** (9.81 / (287.05 * 0.0065))
+    rho = pressure / (287.05 * temperature)
+    return rho
+
+def calculate_fuel_consumption(thrust, specific_fuel_consumption):
+    # Calculate fuel consumption based on thrust and specific fuel consumption
+    fuel_consumption = thrust / specific_fuel_consumption
+    return fuel_consumption
+
+def calculate_efficiency(thrust, fuel_consumption):
+    # Calculate efficiency based on thrust and fuel consumption
+    efficiency = thrust / (fuel_consumption * 9.81)
+    return efficiency
+```
+
+To use this code, you can call the `simulate_propulsion_system` function with the appropriate inputs:
+
+```python
+engine_characteristics = {
+    'max_thrust': 25000,  # Maximum thrust in Newtons
+    'specific_fuel_consumption': 0.6,  # Specific fuel consumption in kg/s/N
+    'efficiency': 0.85  # Efficiency of the propulsion system
+}
+
+airspeed = 300  # Airspeed in m/s
+altitude = 10000  # Altitude in meters
+
+output = simulate_propulsion_system(engine_characteristics, airspeed, altitude)
+print(output)
+```
+
+This code will output a markdown-formatted analysis of the thrust, fuel consumption, and efficiency of the propulsion system based on the given inputs.
+
+```python
+import numpy as np
+from scipy.optimize import minimize
+
+def calculate_stability_and_maneuverability(tail_geometry, aircraft_dynamics, flight_conditions):
+    # Define the objective function
+    def objective_function(x):
+        # Update the tail geometry with the optimized parameters
+        updated_tail_geometry = update_tail_geometry(tail_geometry, x)
+        
+        # Calculate stability and maneuverability characteristics
+        stability = calculate_stability(updated_tail_geometry, aircraft_dynamics)
+        maneuverability = calculate_maneuverability(updated_tail_geometry, flight_conditions)
+        
+        # Define the objective as a weighted sum of stability and maneuverability
+        objective = stability + 0.5 * maneuverability
+        
+        return objective
+    
+    # Define the constraints
+    def constraints(x):
+        # Apply any necessary constraints on the tail geometry parameters
+        # For example, limits on the maximum deflection angle, surface area, etc.
+        # Return a negative value if the constraints are violated, and zero otherwise
+        return -1  # Placeholder constraint
+    
+    # Define the initial guess for the optimization algorithm
+    initial_guess = np.zeros(len(tail_geometry))
+    
+    # Perform the optimization
+    result = minimize(objective_function, initial_guess, constraints=constraints)
+    
+    # Extract the optimized tail shape parameters
+    optimized_tail_shape_parameters = result.x
+    
+    # Calculate stability and maneuverability characteristics with the optimized tail geometry
+    updated_tail_geometry = update_tail_geometry(tail_geometry, optimized_tail_shape_parameters)
+    optimized_stability = calculate_stability(updated_tail_geometry, aircraft_dynamics)
+    optimized_maneuverability = calculate_maneuverability(updated_tail_geometry, flight_conditions)
+    
+    # Generate the markdown output
+    markdown_output = f"""
+    ## Optimized Tail Shape Parameters
+    
+    - Parameter 1: {optimized_tail_shape_parameters[0]}
+    - Parameter 2: {optimized_tail_shape_parameters[1]}
+    - ...
+    
+    ## Stability Characteristics
+    
+    - Stability: {optimized_stability}
+    
+    ## Maneuverability Characteristics
+    
+    - Maneuverability: {optimized_maneuverability}
+    """
+    
+    return markdown_output
+
+def update_tail_geometry(tail_geometry, parameters):
+    # Update the tail geometry with the optimized parameters
+    updated_tail_geometry = tail_geometry.copy()
+    updated_tail_geometry[0] = parameters[0]
+    updated_tail_geometry[1] = parameters[1]
+    # ...
+    
+    return updated_tail_geometry
+
+def calculate_stability(tail_geometry, aircraft_dynamics):
+    # Calculate the stability characteristics based on the tail geometry and aircraft dynamics
+    stability = 0.0
+    # ...
+    
+    return stability
+
+def calculate_maneuverability(tail_geometry, flight_conditions):
+    # Calculate the maneuverability characteristics based on the tail geometry and flight conditions
+    maneuverability = 0.0
+    # ...
+    
+    return maneuverability
+
+# Example usage
+tail_geometry = [1.0, 2.0, 3.0]  # Initial tail geometry parameters
+aircraft_dynamics = {...}  # Aircraft dynamics parameters
+flight_conditions = {...}  # Flight conditions parameters
+
+markdown_output = calculate_stability_and_maneuverability(tail_geometry, aircraft_dynamics, flight_conditions)
+print(markdown_output)
+```
+
+The above code defines a function `calculate_stability_and_maneuverability` that takes inputs such as `tail_geometry`, `aircraft_dynamics`, and `flight_conditions`. It uses the `scipy.optimize.minimize` function to optimize the tail shape parameters based on the provided objective function. The `update_tail_geometry` function updates the tail geometry with the optimized parameters. The `calculate_stability` and `calculate_maneuverability` functions calculate the stability and maneuverability characteristics based on the updated tail geometry, aircraft dynamics, and flight conditions. Finally, the code generates the markdown output with the optimized tail shape parameters, stability characteristics, and maneuverability characteristics.

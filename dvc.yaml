@@ -1,0 +1,4 @@
+artifacts:
+  aerotics_model:
+    path: models/aerotics_model
+    type: model

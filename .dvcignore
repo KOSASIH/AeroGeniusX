@@ -1,3 +1,7 @@
-# Add patterns of files dvc should ignore, which could improve
-# the performance. Learn more at
-# https://dvc.org/doc/user-guide/dvcignore
+# This is a comment
+# Ignore all .pyc files
+*.pyc
+
+# Ignore all files in the build/ directory
+build/
+

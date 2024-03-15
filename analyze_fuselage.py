@@ -34,21 +34,22 @@ def analyze_fuselage(fuselage_geometry, material_properties, applied_loads):
     deformation = bending_moment * length / (modulus_of_elasticity * moment_of_area)
 
     # Output the analysis results
-    print("Fuselage Structural Analysis Results:")
-    print("------------------------------------")
-    print(f"Length: {length} m")
-    print(f"Diameter: {diameter} m")
-    print(f"Thickness: {thickness} m")
-    print(f"Modulus of Elasticity: {modulus_of_elasticity} Pa")
-    print(f"Yield Strength: {yield_strength} Pa")
-    print(f"Axial Load: {axial_load} N")
-    print(f"Bending Moment: {bending_moment} Nm")
-    print("------------------------------------")
-    print(f"Axial Stress: {axial_stress} Pa")
-    print(f"Bending Stress: {bending_stress} Pa")
-    print(f"Maximum Stress: {maximum_stress} Pa")
-    print(f"Safety Factor: {safety_factor}")
-    print(f"Deformation: {deformation} m")
+    results = {
+        'Length': length,
+        'Diameter': diameter,
+        'Thickness': thickness,
+        'Modulus of Elasticity': modulus_of_elasticity,
+        'Yield Strength': yield_strength,
+        'Axial Load': axial_load,
+        'Bending Moment': bending_moment,
+        'Axial Stress': axial_stress,
+        'Bending Stress': bending_stress,
+        'Maximum Stress': maximum_stress,
+        'Safety Factor': safety_factor,
+        'Deformation': deformation
+    }
+
+    return results
 
 # Example usage
 fuselage_geometry = {
@@ -65,6 +66,4 @@ material_properties = {
 applied_loads = {
     'axial_load': 50000,
     'bending_moment': 1000000
-}
 
-analyze_fuselage(fuselage_geometry, material_properties, applied_loads)

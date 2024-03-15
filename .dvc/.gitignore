@@ -1,3 +1,33 @@
-/config.local
-/tmp
-/cache
+# This is the configuration file for the service
+
+# Set the server name
+server {
+    listen 80;
+    server_name example.com;
+
+    # Set the root directory for the server
+    root /var/www/example.com;
+
+    # Enable server blocks
+    index index.html index.htm;
+
+    # Enable access log
+    access_log /var/log/nginx/access.log;
+
+    # Enable error log
+    error_log /var/log/nginx/error.log;
+
+    # Set the directories that are accessible
+    location /config.local {
+        alias /path/to/config.local;
+    }
+
+    location /tmp {
+        alias /tmp;
+    }
+
+    location /cache {
+        alias /cache;
+    }
+}
+

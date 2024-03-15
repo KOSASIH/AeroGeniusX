@@ -1,4 +1,9 @@
 artifacts:
   aerotics_model:
-    path: models/aerotics_model
+    file: models/aerotics_model.h5
     type: model
+    conda_env: aerotics_env
+    description: This is the trained aerotics model.
+    tags:
+      - aerotics
+      - model

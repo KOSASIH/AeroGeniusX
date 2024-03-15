@@ -4,35 +4,20 @@ from scipy.optimize import minimize
 def calculate_weight(fuselage_geometry, material_properties, safety_factors):
     # Define the objective function to minimize weight
     def objective_function(x):
-        # Extract the fuselage shape parameters from the input vector
         length, diameter = x
-
-        # Calculate the cross-sectional area of the fuselage
         cross_sectional_area = np.pi * (diameter / 2) ** 2
-
-        # Calculate the weight of the fuselage based on the material properties and safety factors
         weight = cross_sectional_area * length * material_properties['density'] * safety_factors['weight']
-
         return weight
 
     # Define the constraints for maintaining structural integrity
     def constraint_function(x):
-        # Extract the fuselage shape parameters from the input vector
         length, diameter = x
-
-        # Calculate the critical buckling load of the fuselage
         critical_buckling_load = np.pi ** 2 * material_properties['elastic_modulus'] * (diameter / 2) ** 2 / (4 * length ** 2)
-
-        # Calculate the maximum allowable load based on the safety factors
         maximum_allowable_load = material_properties['yield_strength'] * safety_factors['yield_strength']
-
-        # Ensure that the critical buckling load is greater than the maximum allowable load
         return critical_buckling_load - maximum_allowable_load
 
-    # Define the initial guess for the fuselage shape parameters
-    x0 = [fuselage_geometry['length'], fuselage_geometry['diameter']]
-
-    # Define the bounds for the fuselage shape parameters
+    # Define the initial guess and bounds for the fuselage shape parameters
+    x0 = (fuselage_geometry['length'], fuselage_geometry['diameter'])
     bounds = [(fuselage_geometry['length_min'], fuselage_geometry['length_max']),
               (fuselage_geometry['diameter_min'], fuselage_geometry['diameter_max'])]
 
@@ -57,7 +42,7 @@ def calculate_weight(fuselage_geometry, material_properties, safety_factors):
 
     ## Weight
 
-    - Weight: {optimized_weight} kg
+    - Weight: {optimized_weight:.2f} kg
     """
 
     return markdown_code

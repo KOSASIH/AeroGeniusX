@@ -5,7 +5,8 @@ def calculate_thrust(engine_characteristics, airspeed, altitude):
     thrust = engine_characteristics['thrust_constant'] * engine_characteristics['thrust_coefficient'] * airspeed ** 2
     
     # Adjust thrust for altitude
-    thrust *= (1 - (altitude * engine_characteristics['altitude_loss']))
+    altitude_loss = altitude * engine_characteristics['altitude_loss']
+    thrust *= (1 - altitude_loss) if altitude_loss < 1 else 0
     
     return thrust
 
@@ -17,9 +18,32 @@ def calculate_fuel_consumption(engine_characteristics, thrust):
 
 def calculate_efficiency(thrust, fuel_consumption):
     # Calculate efficiency as thrust divided by fuel consumption
-    efficiency = thrust / fuel_consumption
+    efficiency = thrust / fuel_consumption if fuel_consumption != 0 else 0
     
     return efficiency
+
+def print_analysis(engine_characteristics, airspeed, altitude, thrust, fuel_consumption, efficiency):
+    # Output markdown code for analysis
+    output = f"""
+    ## Propulsion System Analysis
+
+    ### Engine Characteristics
+    - Thrust Constant: {engine_characteristics['thrust_constant']}
+    - Thrust Coefficient: {engine_characteristics['thrust_coefficient']}
+    - Altitude Loss: {engine_characteristics['altitude_loss']}
+    - Specific Fuel Consumption: {engine_characteristics['specific_fuel_consumption']}
+
+    ### Input Values
+    - Airspeed: {airspeed}
+    - Altitude: {altitude}
+
+    ### Results
+    - Thrust: {thrust}
+    - Fuel Consumption: {fuel_consumption}
+    - Efficiency: {efficiency}
+    """
+
+    print(output)
 
 # Example input values
 engine_characteristics = {
@@ -36,24 +60,5 @@ thrust = calculate_thrust(engine_characteristics, airspeed, altitude)
 fuel_consumption = calculate_fuel_consumption(engine_characteristics, thrust)
 efficiency = calculate_efficiency(thrust, fuel_consumption)
 
-# Output markdown code for analysis
-output = f"""
-## Propulsion System Analysis
-
-### Engine Characteristics
-- Thrust Constant: {engine_characteristics['thrust_constant']}
-- Thrust Coefficient: {engine_characteristics['thrust_coefficient']}
-- Altitude Loss: {engine_characteristics['altitude_loss']}
-- Specific Fuel Consumption: {engine_characteristics['specific_fuel_consumption']}
-
-### Input Values
-- Airspeed: {airspeed}
-- Altitude: {altitude}
-
-### Results
-- Thrust: {thrust}
-- Fuel Consumption: {fuel_consumption}
-- Efficiency: {efficiency}
-"""
-
-print(output)
+# Print analysis
+print_analysis(engine_characteristics, airspeed, altitude, thrust, fuel_consumption, efficiency)

@@ -1,10 +1,28 @@
 import math
 
-def calculate_aerodynamic_forces(airspeed, altitude, aircraft_configuration):
-    # Constants
-    rho = 1.225  # Air density at sea level in kg/m^3
-    g = 9.81  # Acceleration due to gravity in m/s^2
-    
+def calculate_air_density(altitude: float) -> float:
+    """Calculate the air density at a given altitude in kg/m^3.
+
+    Args:
+        altitude (float): The altitude in meters.
+
+    Returns:
+        float: The air density in kg/m^3.
+    """
+    rho = 1.225 * (1 - 0.0065 * altitude / 288.15) ** 5.257
+    return rho
+
+def calculate_aerodynamic_forces(aircraft_configuration: dict, airspeed: float, altitude: float) -> str:
+    """Calculate aerodynamic forces and moments for an aircraft.
+
+    Args:
+        aircraft_configuration (dict): The aircraft configuration dictionary.
+        airspeed (float): The airspeed in m/s.
+        altitude (float): The altitude in meters.
+
+    Returns:
+        str: A formatted string with the aerodynamic forces and moments.
+    """
     # Aircraft configuration parameters
     wing_area = aircraft_configuration['wing_area']  # Wing area in square meters
     wing_span = aircraft_configuration['wing_span']  # Wing span in meters
@@ -12,15 +30,16 @@ def calculate_aerodynamic_forces(airspeed, altitude, aircraft_configuration):
     lift_coefficient = aircraft_configuration['lift_coefficient']  # Lift coefficient
     drag_coefficient = aircraft_configuration['drag_coefficient']  # Drag coefficient
     moment_coefficient = aircraft_configuration['moment_coefficient']  # Moment coefficient
-    
+
     # Calculations
+    rho = calculate_air_density(altitude)
     dynamic_pressure = 0.5 * rho * airspeed**2  # Dynamic pressure in Pa
     lift_force = dynamic_pressure * wing_area * lift_coefficient  # Lift force in N
     drag_force = dynamic_pressure * wing_area * drag_coefficient  # Drag force in N
     pitching_moment = dynamic_pressure * wing_area * wing_span * moment_coefficient  # Pitching moment in Nm
-    
+
     # Output markdown
-    output = f"### Aerodynamic Analysis\n\n"
+    output = f"## Aerodynamic Analysis\n\n"
     output += f"**Airspeed:** {airspeed} m/s\n"
     output += f"**Altitude:** {altitude} m\n"
     output += f"**Wing Area:** {wing_area} m^2\n"
@@ -28,21 +47,4 @@ def calculate_aerodynamic_forces(airspeed, altitude, aircraft_configuration):
     output += f"**Aspect Ratio:** {aspect_ratio}\n\n"
     output += f"**Lift Force:** {lift_force} N\n"
     output += f"**Drag Force:** {drag_force} N\n"
-    output += f"**Pitching Moment:** {pitching_moment} Nm\n"
-    
-    return output
-
-# Example usage
-airspeed = 100  # m/s
-altitude = 5000  # m
-aircraft_configuration = {
-    'wing_area': 50,  # m^2
-    'wing_span': 20,  # m
-    'aspect_ratio': 8,
-    'lift_coefficient': 1.2,
-    'drag_coefficient': 0.04,
-    'moment_coefficient': 0.02
-}
-
-aerodynamic_analysis = calculate_aerodynamic_forces(airspeed, altitude, aircraft_configuration)
-print(aerodynamic_analysis)
+    output += f"**Pitching Moment:** {pitching_moment} Nm\n
